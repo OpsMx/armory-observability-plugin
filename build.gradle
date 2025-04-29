@@ -12,7 +12,7 @@ spinnakerBundle {
     version = rootProject.version
 }
 
-version = normalizedVersion()
+version = "v1.0.1-SNAPSHOT"
 
 subprojects { subProject ->
     apply plugin: 'java'
@@ -26,9 +26,12 @@ subprojects { subProject ->
     targetCompatibility = JavaVersion.VERSION_17
     if (korkVersion.endsWith("-SNAPSHOT")) {
         repositories {
-            mavenLocal()
             maven{
-                url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                url  "NEXUS_URL"
+                credentials {
+                    username = "NEXUS_USERNAME"
+                    password = "NEXUS_PASSWORD"
+                }
             }
         }
     }
@@ -73,9 +76,9 @@ subprojects { subProject ->
         // End Datadog Deps
         annotationProcessor(group: 'org.pf4j', name: 'pf4j', version: "${pf4jVersion}")
 
-        testImplementation "org.mockito:mockito-core:4.8.1"
-        testImplementation 'org.springframework:spring-test:6.0.8'
-        testImplementation 'org.springframework.boot:spring-boot-test:3.0.6'
+        testImplementation "org.mockito:mockito-core:5.10.0"
+        testImplementation 'org.springframework:spring-test:6.1.19'
+        testImplementation 'org.springframework.boot:spring-boot-test:3.3.11'
         testImplementation 'org.springframework.vault:spring-vault-core:3.0.2'
         testImplementation(group: 'org.pf4j', name: 'pf4j', version: "${pf4jVersion}")
         testImplementation(group: 'io.spinnaker.kork', name: 'kork-plugins-api', version: "${korkVersion}")
@@ -85,8 +88,8 @@ subprojects { subProject ->
         testImplementation "org.mock-server:mockserver-client-java:5.15.0"
         testImplementation "org.mock-server:mockserver-junit-jupiter:5.15.0"
 
-        testImplementation "org.testcontainers:testcontainers:1.18.0"
-        testImplementation "io.rest-assured:rest-assured:5.3.0"
+        testImplementation "org.testcontainers:testcontainers:1.19.8"
+        testImplementation "io.rest-assured:rest-assured:5.4.0"
         testImplementation "org.mock-server:mockserver-junit-rule:5.10.0"
     }
 
