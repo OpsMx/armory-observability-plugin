@@ -28,7 +28,11 @@ subprojects { subProject ->
         repositories {
             mavenLocal()
             maven{
-                url "https://nexus.opsmx.net/repository/maven-snapshots/"
+                url  "https://nexus1.opsmx.net/repository/maven-snapshots/"
+                credentials {
+                    username = "NEXUS_USERNAME"
+                    password = "NEXUS_PASSWORD"
+                }
             }
         }
     }
@@ -53,21 +57,21 @@ subprojects { subProject ->
         compileOnly "io.spinnaker.kork:kork-core:${korkVersion}"
         compileOnly "io.spinnaker.kork:kork-web:${korkVersion}"
         // Start Prometheus deps
-        implementation("io.micrometer:micrometer-registry-prometheus:1.3.5") {
+        implementation("io.micrometer:micrometer-registry-prometheus:1.13.13") /*{
             exclude group: 'io.micrometer', module: 'micrometer-core'
-        }
-        implementation group: 'io.prometheus', name: 'simpleclient_common', version: '0.9.0'// needs to match micrometer-registry-prometheus
+        }*/
+        implementation group: 'io.prometheus', name: 'simpleclient_common', version: '0.16.0'// needs to match micrometer-registry-prometheus
         // End Prometheus deps
 
         // Start New Relic Deps
-        implementation('com.newrelic.telemetry:micrometer-registry-new-relic:0.5.0') {
-            exclude group: 'io.micrometer', module: 'micrometer-core'
+        implementation('com.newrelic.telemetry:micrometer-registry-new-relic:1.13.13') {
+            //exclude group: 'io.micrometer', module: 'micrometer-core'
             exclude group: 'org.slf4j', module: 'slf4j-api'
         }
         // End New Relic Deps
         // Start Datadog Deps
-        implementation('io.micrometer:micrometer-registry-datadog:1.9.1') {
-            exclude group: 'io.micrometer', module: 'micrometer-core'
+        implementation('io.micrometer:micrometer-registry-datadog:1.13.13') {
+            //exclude group: 'io.micrometer', module: 'micrometer-core'
             exclude group: 'org.slf4j', module: 'slf4j-api'
         }
         // End Datadog Deps
