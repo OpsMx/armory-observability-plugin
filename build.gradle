@@ -26,8 +26,9 @@ subprojects { subProject ->
     targetCompatibility = JavaVersion.VERSION_17
     if (korkVersion.endsWith("-SNAPSHOT")) {
         repositories {
+            mavenLocal()
             maven{
-                url  "NEXUS_URL"
+                url  "https://nexus1.opsmx.net/repository/maven-snapshots/"
                 credentials {
                     username = "NEXUS_USERNAME"
                     password = "NEXUS_PASSWORD"
@@ -36,6 +37,7 @@ subprojects { subProject ->
         }
     }
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
