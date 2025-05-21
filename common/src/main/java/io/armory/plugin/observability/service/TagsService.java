@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
 
@@ -57,7 +58,8 @@ public class TagsService {
 
   public TagsService(
       PluginConfig metricsConfig,
-      VersionResolver versionResolver,
+
+      @Qualifier("versionResolver") VersionResolver versionResolver,
       @Value("${spring.application.name:#{null}}") String springInjectedApplicationName) {
 
     this.metricsConfig = metricsConfig.getMetrics();

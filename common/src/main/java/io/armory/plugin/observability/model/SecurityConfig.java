@@ -23,11 +23,12 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         if (pluginConfig.getMetrics().getPrometheus().isEnabled()) {
-            http.authorizeHttpRequests()
+            http.authorizeHttpRequests((authz) ->
+                    authz
                     .requestMatchers("aop-prometheus")
                     .permitAll()
                     .anyRequest()
-                    .authenticated();
+                    .authenticated());
             return http.build();
         } else {
             http.authorizeHttpRequests((authz) -> authz.requestMatchers("aop-prometheus").denyAll());
