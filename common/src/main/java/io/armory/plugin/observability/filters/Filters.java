@@ -23,4 +23,13 @@ public class Filters {
    */
   public static final MeterFilter DENY_CONTROLLER_INVOCATIONS_METRICS =
       MeterFilter.denyNameStartsWith("controller.invocations");
+
+  /**
+   * Deny legacy Armory JVM memory gauge that emits NaN.
+   * Correct Micrometer metric is jvm_memory_used_bytes.
+   */
+  public static final MeterFilter DENY_LEGACY_JVM_MEMORY_USED =
+          MeterFilter.deny(id ->
+                  id.getName().startsWith("jvm_")
+                          && !id.getName().endsWith("_bytes"));
 }

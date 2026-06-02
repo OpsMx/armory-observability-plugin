@@ -15,5 +15,5 @@ public class ArmoryRecommendedFilters {
    * TODO implement pattern that allows for users to pick and choose named filters and not rely on the curated list.
    */
   public static List<MeterFilter> ARMORY_RECOMMENDED_FILTERS =
-      List.of(DENY_CONTROLLER_INVOCATIONS_METRICS);
+      List.of(DENY_CONTROLLER_INVOCATIONS_METRICS, DENY_LEGACY_JVM_MEMORY_USED);
 }
